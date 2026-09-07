@@ -112,13 +112,17 @@ jobs:
 
 ## 📊 Presentación Ejecutiva (Para Directivos)
 
-En esta misma carpeta encontrarás el archivo:
-📄 **`Presentacion_Directivos_SonarQube.html`**
+Para facilitar la comunicación con Gerencia y Dirección, hemos desplegado una **Presentación Interactiva** que explica estratégicamente el valor de esta implementación.
 
-Este archivo es una presentación animada e interactiva (creada con HTML/Reveal.js) diseñada para convencer y explicar a la Dirección/Gerencia el por qué de la implementación de esta herramienta.
+🌐 **Ver Presentación en Línea:** [https://raltamirano-boop.github.io/SonarQube/](https://raltamirano-boop.github.io/SonarQube/)
 
-- **Cómo abrirlo:** Solo dale doble clic para abrirlo en Chrome/Edge.
-- **Contenido:** Aborda la disminución de deuda técnica, seguridad desde el diseño, Retorno de Inversión (ROI), el flujo del Quality Gate, e integra métricas y capturas directas del sistema.
+**Contenido de la Presentación:**
+- Disminución de deuda técnica y seguridad desde el diseño.
+- Retorno de Inversión (ROI) para el equipo y el negocio.
+- Explicación visual del flujo de calidad (Quality Gate).
+- Radiografía actual del sistema con métricas y capturas reales.
+
+> **Nota:** El código fuente de esta presentación se encuentra en el archivo `index.html` de este repositorio.
 
 ---
 *Mantenimiento: ODM (Infraestructura y Calidad de Código)*
