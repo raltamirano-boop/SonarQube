@@ -44,12 +44,22 @@ El archivo `docker-compose.yml` despliega dos contenedores orquestados:
 
 ## ☁️ Exposición Local hacia GitHub Actions (Uso de Ngrok)
 
-Si estás trabajando en local y necesitas que GitHub Actions mande sus reportes a tu máquina, necesitas exponer el puerto `9000`:
+**¿Por qué usamos ngrok?**
+GitHub Actions se ejecuta en la nube, por lo que necesita comunicarse con tu SonarQube para enviarle el código que debe analizar. Como tu SonarQube está corriendo en tu computadora local (`localhost`), GitHub no tiene forma de "verlo". **Ngrok** resuelve esto creando un túnel seguro y generando una URL pública temporal que conecta directamente a tu puerto local.
+
+**¿Cómo instalarlo?**
+1. Descarga el ejecutable desde [ngrok.com/download](https://ngrok.com/download).
+2. Descomprime el archivo e inicia sesión en su página para obtener tu token de autenticación gratuito.
+3. Configura tu token en tu terminal ejecutando: `ngrok config add-authtoken <tu-token>`
+
+Una vez instalado, expón el puerto `9000` ejecutando:
 
 ```bash
 ngrok http 9000
 ```
 Copia el enlace `https://xxxx.ngrok-free.app` que te arroje la consola; este será tu `SONAR_HOST_URL` para GitHub.
+
+<img src="./images-sonar-ui/ngrok.liga_para_usarloLocalmente.png" width="600">
 
 ---
 
@@ -60,11 +70,16 @@ Para que tus repositorios analicen el código automáticamente en cada commit:
 1. **Generar Token en SonarQube:**
    - Ve a `My Account > Security`.
    - Genera un nuevo Token de tipo `User Token` (o `Global Analysis Token`). Cópialo.
+   
+   <img src="./images-sonar-ui/entar_en_sonar_qube_a_configuracion_para_obtener_token.png" width="400">
+   <img src="./images-sonar-ui/genera_token_sonar_qube.png" width="400">
 
 2. **Configurar Secrets en GitHub:**
    En tu repositorio de código en GitHub, ve a `Settings > Secrets and variables > Actions` y crea:
    - `SONAR_TOKEN`: Pega aquí el token generado en SonarQube.
    - `SONAR_HOST_URL`: Pega la URL de ngrok (ej. `https://xxxx.ngrok-free.app`).
+
+   <img src="./images-sonar-ui/configuracion_github_secret_and_variables.png" width="600">
 
 3. **Ejemplo básico de Workflow (`.github/workflows/build.yml`):**
 
@@ -88,6 +103,10 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
 ```
+
+**Resultado en GitHub Actions (Ejecución Exitosa):**
+
+<img src="./images-sonar-ui/sonarque_vista_gitActions.png" width="600">
 
 ---
 
