@@ -1,0 +1,27 @@
+
+
+services:
+  sonarqube:
+    image: sonarqube:lts-community
+    container_name: sonarqube_prueba
+    ports:
+      - "9000:9000"
+    environment:
+      - SONAR_JDBC_USERNAME=root
+      - SONAR_JDBC_PASSWORD=toor
+      - SONAR_JDBC_URL=jdbc:postgresql://db:5432/sonar
+    depends_on:
+      - db
+
+  db:
+    image: postgres:15
+    container_name: postgres_sonar
+    environment:
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=toor
+      - POSTGRES_DB=sonar
+    volumes:
+      - sonar_db_data:/var/lib/postgresql/data
+
+volumes:
+  sonar_db_data:
